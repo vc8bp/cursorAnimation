@@ -4,11 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="./index.js"></script>
-    <link rel="stylesheet"  href="main.css" />
+    <script defer src="js/index.js"></script>
+    <script defer src="js/options.js"></script>
+    <link rel="stylesheet"  href="css/main.css" />
+    <link rel="stylesheet"  href="css/reset.css" />
     <title>Document</title>
+    <script>
+        window.isTrail = true
+        window.isStars = true
+        window.starsCount = 2
+        window.starDistance = 20
+        window.trailDistance = 10
+        window.trailFade = 0.5
+        window.trailThickness = 30
+        window.trailColor = "#FF69B4"
+    </script>
 </head>
 <body>
-    
+    <nav>
+        <div>
+            <div class="checkbox">
+                <label>Show Trails</label>
+                <input type="checkbox" id="isTrail" onchange="handleChange('isTrail')" >
+            </div>
+            <div class="checkbox">
+                <label>Show Stars</label>
+                <input type="checkbox" id="isStars" onchange="handleChange('isStars')" >
+            </div>
+        </div>
+ 
+        <div class="inputWrapper">
+            <label>Star coutns</label>
+            <input maxlength="10" type="number" id="starsCount" oninput="handleChange('starsCount')" >
+        </div>
+        <div class="inputWrapper">
+            <label>Star Throttal Distance</label>
+            <input type="number" id="starDistance" oninput="handleChange('starDistance')" >
+        </div>
+        <div class="inputWrapper">
+            <label>Trail Throttal Distance</label>
+            <input type="number" id="trailDistance" oninput="handleChange('trailDistance')" >
+        </div>
+        <div class="inputWrapper">
+            <label>Trail thickness</label>
+            <input type="number" id="trailThickness" oninput="handleChange('trailThickness')" >
+        </div>
+        <div class="inputWrapper">
+            <label>Trail Fade Timeout (Second)</label>
+            <input type="number" id="trailFade" oninput="handleChange('trailFade')" >
+        </div>
+        <div class="inputWrapper">
+            <label>Trail Color</label>
+            <input type="color" id="trailColor" oninput="handleChange('trailColor')" >
+        </div>
+    </nav>
+    <div id="effect">
+
+    </div>
 </body>
 </html>

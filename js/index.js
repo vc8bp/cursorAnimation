@@ -14,7 +14,9 @@ const generateRandom = (length) =>{
    return Math.floor(Math.random() * length);
 }
 
-const prev = { top: 0, left: 0}
+const prvStarPosi = { top: 0, left: 0}
+const prvTrailPosi = { top: 0, left: 0}
+
 const noOfStars = 3;
 
 const animate = (star, top, left, gravaty) => {
@@ -34,7 +36,9 @@ const animate = (star, top, left, gravaty) => {
 }
 
 const animateTrail = (trail) => {
-    const duration = 500
+    console.log("lol")
+
+    const duration = window.trailFade * 1000
     setTimeout(() => { trail.style.background = "black" },duration-100)
     setTimeout(() => trail.remove() ,duration)
     trail.animate(
@@ -53,8 +57,8 @@ const generateStar = (mouseX, mouseY) => {
     star.style.top = mouseY + "px";
    
     document.body.appendChild(star)
-    const xdirection = mouseX > prev.left ? mouseX-100 : mouseX+100
-    const ydirection = mouseY > prev.top ? mouseY-100 : mouseY+100
+    const xdirection = mouseX > prvStarPosi.left ? mouseX-100 : mouseX+100
+    const ydirection = mouseY > prvStarPosi.top ? mouseY-100 : mouseY+100
     animate(star, ydirection, xdirection, 100)    
 }
 
@@ -64,18 +68,31 @@ const generateTrail = (mouseX, mouseY) => {
     trail.className = "trail"
     trail.style.left = mouseX + "px";
     trail.style.top = mouseY + "px";
+    trail.style.backgroundColor = window.trailColor;
+    trail.style.width = window.trailThickness+"px";
+    trail.style.height = window.trailThickness+"px";
     document.body.appendChild(trail)
     animateTrail(trail)
 }
 
-document.addEventListener('mousemove', function(event) {
+const effectContainer = document.getElementById("effect")
+effectContainer.addEventListener('mousemove', function(event) {
     var mouseX = event.clientX;
     var mouseY = event.clientY;
 
-    generateTrail(mouseX, mouseY)   
-    if(Math.abs(prev.left - mouseX) >= 50 || Math.abs(prev.top - mouseY) >= 50){
-        for(let i =0; i <= noOfStars; i++) generateStar(mouseX, mouseY)
-        prev.top = mouseY
-        prev.left = mouseX
+    if(window.isTrail) {
+        if(Math.abs(prvTrailPosi.left - mouseX) >= window.trailDistance || Math.abs(prvTrailPosi.top - mouseY) >= window.trailDistance){
+            generateTrail(mouseX, mouseY) 
+            prvTrailPosi.top = mouseY
+            prvTrailPosi.left = mouseX
+        }        
     }
+    
+    if(window.isStars){
+        if(Math.abs(prvStarPosi.left - mouseX) >= window.starDistance || Math.abs(prvStarPosi.top - mouseY) >= window.starDistance){
+            for(let i = 1; i <= window.starsCount; i++) generateStar(mouseX, mouseY)
+            prvStarPosi.top = mouseY
+            prvStarPosi.left = mouseX
+        }
+    } 
 });

@@ -1,0 +1,33 @@
+body{
+    overflow: hidden;
+}
+#effect{
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+}
+
+.stars{
+    position: absolute;
+}
+.trail {
+    position: absolute;
+    filter: blur(15px);
+}
+
+nav{
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+}
+nav > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.checkbox{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
